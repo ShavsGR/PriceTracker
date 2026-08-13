@@ -9,6 +9,8 @@ namespace PriceTracker.Domain.Entities
     public class PriceAlert
     {
         private readonly List<IDomainEvent> _domainEvents = new();
+        public List<IDomainEvent> DomainEvents => _domainEvents;
+        
 
         public Guid Id {get; private set; }
         public Guid ProductId {get; private set; }
@@ -49,6 +51,7 @@ namespace PriceTracker.Domain.Entities
 
                 _domainEvents.Add(new PriceAlertEvent(
                     Id,ProductId,UserId,TargetPrice,newPrice));
+                return true;
             }
 
             return false;
