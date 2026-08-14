@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using PriceTracker.Domain;
+using PriceTracker.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,9 +13,9 @@ namespace PriceTracker.UnitTests
         public void UpdatePrice_WithDifferentCurrency_MustReturnInvalidOperationException()
         {
             // Arrange
-            var eurosPrice = Precio.EnEuros(100);
-            var product = new Producto("Teclado Mecánico", "https://tienda.com/teclado", eurosPrice);
-            var dollarsPrice = new Precio(100, "USD");
+            var eurosPrice = Price.EnEuros(100);
+            var product = new Product("Teclado Mecánico", "https://tienda.com/teclado", eurosPrice);
+            var dollarsPrice = new Price(100, "USD");
 
             // Act
             Action act = () => product.UpdatePrice(dollarsPrice);
@@ -28,9 +29,9 @@ namespace PriceTracker.UnitTests
         public void UpdatePrice_WichValidPrice_MustModifyPriceAndUpdateDate()
         {
             // Arrange
-            var initialPrice = Precio.EnEuros(100);
-            var product = new Producto("Teclado Mecánico", "https://tienda.com/teclado", initialPrice);
-            var newPrice = Precio.EnEuros(85);
+            var initialPrice = Price.EnEuros(100);
+            var product = new Product("Teclado Mecánico", "https://tienda.com/teclado", initialPrice);
+            var newPrice = Price.EnEuros(85);
 
             // Act
             product.UpdatePrice(newPrice);
