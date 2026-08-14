@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using PriceTracker.Domain;
 using PriceTracker.Domain.Entities;
 using PriceTracker.Domain.Events;
 using System;
@@ -14,9 +13,9 @@ namespace PriceTracker.UnitTests
         public void EvaluateAndSend_WhenPriceIsLessThanCurrent_MustBeSentAndRegistered()
         {
             // Arrange
-            var targetPrice = Precio.EnEuros(100);
+            var targetPrice = Price.EnEuros(100);
             var alert = new PriceAlert(Guid.NewGuid(), Guid.NewGuid(), targetPrice);
-            var newPrice = Precio.EnEuros(90);
+            var newPrice = Price.EnEuros(90);
 
             // Act
             bool resultado = alert.EvaluateAndSend(newPrice);
@@ -37,9 +36,9 @@ namespace PriceTracker.UnitTests
         public void EvaluateAndSend_WhenPriceIsHigher_ShouldNotBeSend()
         {
             // Arrange
-            var targetPrice = Precio.EnEuros(100);
+            var targetPrice = Price.EnEuros(100);
             var alert = new PriceAlert(Guid.NewGuid(), Guid.NewGuid(), targetPrice);
-            var higherPrice = Precio.EnEuros(110);
+            var higherPrice = Price.EnEuros(110);
 
             // Act
             bool result = alert.EvaluateAndSend(higherPrice);

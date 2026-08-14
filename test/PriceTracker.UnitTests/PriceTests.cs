@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using PriceTracker.Domain;
+using PriceTracker.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,10 +16,10 @@ namespace PriceTracker.UnitTests
             string currency = "EUR";
 
             // Act
-            var precio = new Precio(price, currency);
+            var precio = new Price(price, currency);
 
             // Assert
-            precio.Price.Should().Be(99.99m);
+            precio.PriceValue.Should().Be(99.99m);
             precio.Currency.Should().Be("EUR"); // Verifica la conversión a mayúsculas
         }
 
@@ -27,7 +27,7 @@ namespace PriceTracker.UnitTests
         public void Create_WithNegativePrice_MustReturnArgumentException()
         {
             // Act
-            Action act = () => new Precio(-10.00m, "EUR");
+            Action act = () => new Price(-10.00m, "EUR");
 
             // Assert
             act.Should().Throw<ArgumentException>()
@@ -38,8 +38,8 @@ namespace PriceTracker.UnitTests
         public void TwoPricesWithSamePriceAndCurrency_MustBeTheSame()
         {
             // Arrange & Act
-            var price1 = Precio.EnEuros(50);
-            var price2 = Precio.EnEuros(50);
+            var price1 = Price.EnEuros(50);
+            var price2 = Price.EnEuros(50);
 
             // Assert
             price1.Should().Be(price2); // Comprueba la igualdad por valor propia del record

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PriceTracker.Domain
+namespace PriceTracker.Domain.Entities
 {
-    public class Producto
+    public class Product
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; } = string.Empty;
         public string ProductURL { get; private set; } = string.Empty;
-        public Precio CurrentPrice { get; private set; }
+        public Price CurrentPrice { get; private set; }
         public DateTime PublishDateTime { get; private set; }
         public DateTime LastUpdate { get; private set; }
 
-        public Producto(string name, string url, Precio currentPrice)
+        public Product(string name, string url, Price currentPrice)
         {
             if(string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("Needs a valid name");
 
@@ -27,7 +27,7 @@ namespace PriceTracker.Domain
             PublishDateTime = DateTime.Now;
         }
 
-        public void UpdatePrice(Precio newPrice)
+        public void UpdatePrice(Price newPrice)
         {
             if (newPrice == null) throw new ArgumentNullException(nameof(newPrice));
             if (CurrentPrice.Currency != newPrice.Currency) throw new InvalidOperationException("Price need to have same currency");

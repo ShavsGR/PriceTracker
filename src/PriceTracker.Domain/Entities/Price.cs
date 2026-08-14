@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PriceTracker.Domain
+namespace PriceTracker.Domain.Entities
 {
-    public record Precio
+    public record Price
     {
-        public decimal Price { get; set; }
+        public decimal PriceValue { get; set; }
         public string Currency {  get; set; }
 
-        public Precio(decimal price, string currency)
+        public Price(decimal price, string currency)
         {
             if(price < 0)
             {
@@ -22,10 +22,10 @@ namespace PriceTracker.Domain
                 throw new ArgumentException("It needs to have a currency");
             }
 
-            Price = decimal.Round(price,2);
+            PriceValue = decimal.Round(price,2);
             Currency = currency;
         }
 
-        public static Precio EnEuros(decimal price) => new Precio(price, "EUR");
+        public static Price EnEuros(decimal price) => new Price(price, "EUR");
     }
 }
